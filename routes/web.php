@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','AnasayfaController@index')->name('anasayfa');
 
-Route::get('/urun/{isim}/{id}',function ($ad,$id){
-    return "$ad , $id";
-});
+
