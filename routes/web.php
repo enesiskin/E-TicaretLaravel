@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/urun/{isim}/{id}',function ($ad,$id){
+    return "$ad , $id";
+});
