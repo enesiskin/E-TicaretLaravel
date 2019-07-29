@@ -10811,8 +10811,8 @@ a {
 }
 
 #commerce footer {
-  background-color: #fff;
+  background-color: deeppink;
   padding: 50px;
-  margin-top: 20px;
+  margin-top: 20px !important;
 }
 
