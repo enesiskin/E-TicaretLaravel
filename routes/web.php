@@ -12,5 +12,6 @@
 */
 
 Route::get('/','AnasayfaController@index')->name('anasayfa');
+Route::get('/kategori/{slug_kategoriadi}','KategoriController@index')->name('kategori');
 
 
