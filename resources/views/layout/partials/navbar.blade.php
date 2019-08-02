@@ -1,5 +1,6 @@
 <nav class="navbar navbar-default">
     <div class="container">
+        <div class="row">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
@@ -10,6 +11,7 @@
             <a class="navbar-brand" href="{{route('anasayfa')}}">
                 <img src=" {{ asset('img/logo.png') }} ">
             </a>
+        </div>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -25,9 +27,9 @@
                 </div>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                @auth
-                <li><a href="#"><i class="fa fa-shopping-cart"></i> Sepet <span class="badge badge-theme">5</span></a></li>
-                @endauth
+
+                <li><a href=" {{route('sepet')}}"><i class="fa fa-shopping-cart"></i> Sepet <span class="badge badge-theme">{{Cart::count()}}</span></a></li>
+
                 @guest
                     <li><a href="{{route('kullanici.oturumac')}}">Oturum Aç</a></li>
                 <li><a href="{{route('kullanici.kaydol')}}">Kaydol</a></li>
@@ -35,9 +37,9 @@
 
                 @auth
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Profil <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Profil </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Siparişlerim</a></li>
+                        <li><a href="{{route('siparisler')}}">Siparişlerim</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Çıkış</a>
                             <form id="logout-form" action="{{route('kullanici.oturumukapat')}}" method="post" style="display: none;">

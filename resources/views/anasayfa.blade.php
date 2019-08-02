@@ -1,11 +1,7 @@
 @extends('layout.partials.master')
 @section('title','Anasayfa')
 @section('content')
-    @if(session()->has('mesaj'))
-        <div class="container">
-            <div class="alert alert-{{'mesaj_tur'}}">{{'mesaj'}}</div>
-        </div>
-        @endif
+   @include('layout.partials.alert')
     <div class="container">
         <div class="row">
             <div class="col-md-3">

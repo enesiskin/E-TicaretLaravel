@@ -4,20 +4,21 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSepetTable extends Migration
+class CreateKullaniciDetayTable extends Migration
 {
-
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
     public function up()
     {
-        Schema::create('sepet', function (Blueprint $table) {
+        Schema::create('kullanici_detay', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('kullanici_id')->unsigned();
-            $table->timestamp('olusturma_tarihi')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('guncelleme_tarihi')->default(DB::raw('CURRENT_TIMESTAMP on UPDATE
-            CURRENT_TIMESTAMP'));
-
-            $table->timestamp('silinme_tarihi')->nullable();
-
+            $table->string('adres',200)->nullable();
+            $table->string('ceptelefonu', 15)->nullable();
+            $table->string('telefon', 15)->nullable();
 
             $table->foreign('kullanici_id')->references('id')->on('kullanici')->onDelete('cascade');
         });
@@ -30,6 +31,6 @@ class CreateSepetTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sepet');
+        Schema::dropIfExists('kullanici_detay');
     }
 }

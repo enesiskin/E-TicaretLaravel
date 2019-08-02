@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Kullanici;
 use App\Mail\KullaniciKayitMail;
+use App\Models\KullaniciDetay;
+use App\Models\Sepet;
+use App\Models\SepetUrun;
+
 use Illuminate\Support\Facades\Hash;// hash kullacaksan ekle
 use Illuminate\Support\Facades\Mail; //mail sınıfı çağırmak için ekle
 use Illuminate\Support\Str; // str kullanacaksan ekle
-
+use Cart;
 
 class KullaniciController extends Controller
 {
@@ -22,6 +26,7 @@ class KullaniciController extends Controller
     public function giris_form(){
         return view('kullanici.oturumac');
     }
+
     public  function giris(){
         $this->validate(request(),[
             'email'=>'required|email',
@@ -29,7 +34,41 @@ class KullaniciController extends Controller
             ]);
         if(auth()->attempt(['email' => request('email'), 'password' => request('sifre')], request()->has('benihatirla'))){
                 \request()->session()->regenerate(); // sessionu yenile
-                return redirect()->intended('/'); // giriş yapılmışsa istenlen sayfaya yapılmamış ise anasayfaya yönlendir
+
+            //verdiğimiz kullanici id ye ait giriş yapan kullanıcının idsinden alacağız. db de varsa ilk kaydı al yoksa oluştur
+            //$aktif_sepet_id = Sepet::firstOrCreate(['kullanici_id'=> auth()->id()])->id;
+            // alttaki koda çevrildi çünkü siparis edilen sepet id kalıyor yeni sipariste sıkıntı çıkıyor
+            $aktif_sepet_id = Sepet::aktif_sepet_id();
+            if (is_null($aktif_sepet_id)){
+                $aktif_sepet= Sepet::create(['kullanici_id' =>auth()->id()]);
+                $aktif_sepet_id = $aktif_sepet->id;
+            }
+
+            session()->put('aktif_sepet_id',$aktif_sepet_id);
+
+
+            // sessionda yer alan tüm ürünleri veritabanın varsa güncelledik yoksa ekledik
+            if (Cart::count()>0)
+            {
+                foreach (Cart::content() as $cartItem)
+                    {
+                        SepetUrun::updateorCreate(
+                            ['sepet_id' => $aktif_sepet_id, 'urun_id'=> $cartItem->id],
+                            ['adet'=>$cartItem->qty, 'fiyati'=> $cartItem->price, 'durum' => 'Beklemede']
+                        );
+                    }
+            }
+            Cart::destroy();
+            $sepetUrunler = SepetUrun::with('urun')->where('sepet_id',$aktif_sepet_id)->get();
+            foreach ($sepetUrunler as $sepetUrun)
+            {
+                Cart::add($sepetUrun->urun->id, $sepetUrun->urun->urun_adi,$sepetUrun->adet,$sepetUrun->fiyati,
+                ['slug' => $sepetUrun->urun->slug]);
+            }
+
+
+            return redirect()->intended('/'); // giriş yapılmışsa istenlen sayfaya yapılmamış ise anasayfaya yönlendir
+
         }else{
             $errors =['email' => 'Hatalı Giriş.'];
             return back()->withErrors($errors);
@@ -53,6 +92,8 @@ class KullaniciController extends Controller
             'aktivasyon_anahtari'=>Str::random(60), // 60 karakterlik string oluşturmasını sağlar
             'aktif_mi'=>0
         ]);
+
+        $kullanici->detay->save(new KullaniciDetay());
 
        Mail::to(request('email'))->send(new KullaniciKayitMail($kullanici));
        auth()->login($kullanici); // login gerçekleşir

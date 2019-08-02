@@ -36775,6 +36775,29 @@ __webpack_require__(/*! ./bootstrap */ "./resources/assets/js/bootstrap.js");
 setTimeout(function () {
   $('alert').slideUp(500);
 }, 3000);
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+$('.urun-adet-artir, .urun-adet-azalt').on('click', function () {
+  var id = $(this).attr('data-id');
+  var adet = $(this).attr('data-adet');
+  $.ajax({
+    type: 'PATCH',
+
+    /*bir veri güncellerken kullanılır post olarakta kullanilabilir */
+    url: '/sepet/guncelle/' + id,
+
+    /* yada  url: '{{url('sepet/guncelle')}}' diye tanımlayabilirz */
+    data: {
+      adet: adet
+    },
+    success: function success(result) {
+      window.location.href = '/sepet';
+    }
+  });
+});
 
 /***/ }),
 
