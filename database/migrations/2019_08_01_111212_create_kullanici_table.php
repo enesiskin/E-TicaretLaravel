@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateKategoriTable extends Migration
+class CreateKullaniciTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,22 @@ class CreateKategoriTable extends Migration
      */
     public function up()
     {
-        Schema::create('kategori', function (Blueprint $table) {
+        Schema::create('kullanici', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('ust_id')->nullable();
-            $table->string('kategori_adi',30);
-            $table->string('slug',40);
+            $table->string('adsoyad', 60);
+            $table->string('sifre',60);
+            $table->string('email',150)->unique();
+            $table->string('aktivasyon_anahtari')->nullable();
+            $table->boolean('aktif_mi')->default(0);
+            $table->rememberToken();
+
+
             $table->timestamp('olusturma_tarihi')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('guncelleme_tarihi')->default(DB::raw('CURRENT_TIMESTAMP on UPDATE
             CURRENT_TIMESTAMP'));
-           // $table-> softDeletes();
+
             $table->timestamp('silinme_tarihi')->nullable();
+
 
         });
     }
@@ -34,6 +40,6 @@ class CreateKategoriTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kategori');
+        Schema::dropIfExists('kullanici');
     }
 }
