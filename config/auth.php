@@ -45,6 +45,10 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+        'yonetim' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
     ],
 
     /*

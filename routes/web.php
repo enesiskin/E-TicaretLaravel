@@ -11,6 +11,39 @@
 |
 */
 
+Route::group(['prefix'=>'yonetim', 'namespace' =>'Yonetim'],function () {
+   // Route::redirect('/','/yonetim/oturumac');
+    Route::match(['get','post'], '/oturumac', 'KullaniciController@oturumac')->name('yonetim.oturumac');
+    //hem get hem postu kullanmak için için match yazdık
+    Route::get('/oturumukapat', 'KullaniciController@oturumukapat')->name('yonetim.oturumukapat');
+    Route::get('/anasayfa', 'AnasayfaController@index')->name('yonetim.anasayfa');
+
+
+
+Route::group(['middleware'=>'yonetim'],function () { // ekstra bir middleware yapacaksak kernele 'yonetim' => \App\Http\Middleware\Yonetim::class, tanımalamak lazım
+
+        Route::get('/anasayfa', 'AnasayfaController@index')->name('yonetim.anasayfa');
+
+        Route::group(['prefix'=>'kullanici'],function (){
+            Route::match(['get','post'],'/', 'KullaniciController@index')->name('yonetim.kullanici');
+            Route::get( '/yeni', 'KullaniciController@form')->name('yonetim.kullanici.yeni');
+            Route::get('/duzenle/{id}', 'KullaniciController@form')->name('yonetim.kullanici.duzenle');
+            Route::post('/kaydet/{id}', 'KullaniciController@kaydet')->name('yonetim.kullanici.kaydet');
+            Route::get('/sil/{id}', 'KullaniciController@sil')->name('yonetim.kullanici.sil');
+
+        });
+
+    Route::group(['prefix'=>'kategori'],function (){
+        Route::match(['get','post'],'/', 'KategoriController@index')->name('yonetim.kategori');
+        Route::get( '/yeni', 'KategoriController@form')->name('yonetim.kategori.yeni');
+        Route::get('/duzenle/{id}', 'KategoriController@form')->name('yonetim.kategori.duzenle');
+        Route::post('/kaydet/{id}', 'KategoriController@kaydet')->name('yonetim.kategori.kaydet');
+        Route::get('/sil/{id}', 'KategoriController@sil')->name('yonetim.kategori.sil');
+
+    });
+
+    });
+});
 Route::get('/','AnasayfaController@index')->name('anasayfa');
 Route::get('/kategori/{slug_kategoriadi}','KategoriController@index')->name('kategori');
 Route::get('/urun/{slug_urunadi}','UrunController@index')->name('urun');

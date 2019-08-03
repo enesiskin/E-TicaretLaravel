@@ -26,13 +26,22 @@ class KullaniciController extends Controller
     public function giris_form(){
         return view('kullanici.oturumac');
     }
+    public function kaydol_form(){
+        return view('kullanici.kaydol');
+    }
 
     public  function giris(){
+
         $this->validate(request(),[
             'email'=>'required|email',
             'sifre'=>'required'
             ]);
-        if(auth()->attempt(['email' => request('email'), 'password' => request('sifre')], request()->has('benihatirla'))){
+
+        $credentials =['email' => request('email'),
+                       'password' => request('sifre'),
+                        'aktif_mi' => 1
+            ];
+        if(auth()->attempt($credentials, request()->has('benihatirla'))){
                 \request()->session()->regenerate(); // sessionu yenile
 
             //verdiğimiz kullanici id ye ait giriş yapan kullanıcının idsinden alacağız. db de varsa ilk kaydı al yoksa oluştur
@@ -76,9 +85,7 @@ class KullaniciController extends Controller
     }
 
 
-    public function kaydol_form(){
-        return view('kullanici.kaydol');
-    }
+
     public  function kaydol(){
         $this->validate(request(),[
             'adsoyad'=> 'required|min:5|max:60', //5-60 arası girilmesi zorunlu alan

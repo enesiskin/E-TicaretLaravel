@@ -20,6 +20,7 @@ class CreateKullaniciTable extends Migration
             $table->string('email',150)->unique();
             $table->string('aktivasyon_anahtari')->nullable();
             $table->boolean('aktif_mi')->default(0);
+            $table->boolean('yonetici_mi')->default(0);
             $table->rememberToken();
 
 

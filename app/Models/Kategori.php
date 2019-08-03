@@ -18,4 +18,10 @@ class Kategori extends Model
     public function urunler(){ //bir kategoriye ait ürünler çekilir
         return $this->belongsToMany('App\Models\Urun', 'kategori_urun');
     }
+    // lazy loadingmiymiş nemiş
+    public function ust_kategori(){
+        return $this->belongsTo('App\Models\Kategori', 'ust_id')->withDefault([
+            'kategori_adi' =>'Ana Kategori'
+        ]);
+    }
 }

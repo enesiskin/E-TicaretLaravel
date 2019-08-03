@@ -36859,6 +36859,17 @@ if (token) {
 
 /***/ }),
 
+/***/ "./resources/assets/sass/admin.scss":
+/*!******************************************!*\
+  !*** ./resources/assets/sass/admin.scss ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/assets/sass/app.scss":
 /*!****************************************!*\
   !*** ./resources/assets/sass/app.scss ***!
@@ -36870,15 +36881,28 @@ if (token) {
 
 /***/ }),
 
+/***/ "./resources/assets/sass/login.scss":
+/*!******************************************!*\
+  !*** ./resources/assets/sass/login.scss ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ 0:
-/*!***************************************************************************!*\
-  !*** multi ./resources/assets/js/app.js ./resources/assets/sass/app.scss ***!
-  \***************************************************************************/
+/*!*************************************************************************************************************************************************!*\
+  !*** multi ./resources/assets/js/app.js ./resources/assets/sass/app.scss ./resources/assets/sass/admin.scss ./resources/assets/sass/login.scss ***!
+  \*************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! C:\AppServ\www\Project\resources\assets\js\app.js */"./resources/assets/js/app.js");
-module.exports = __webpack_require__(/*! C:\AppServ\www\Project\resources\assets\sass\app.scss */"./resources/assets/sass/app.scss");
+__webpack_require__(/*! C:\AppServ\www\Project\resources\assets\sass\app.scss */"./resources/assets/sass/app.scss");
+__webpack_require__(/*! C:\AppServ\www\Project\resources\assets\sass\admin.scss */"./resources/assets/sass/admin.scss");
+module.exports = __webpack_require__(/*! C:\AppServ\www\Project\resources\assets\sass\login.scss */"./resources/assets/sass/login.scss");
 
 
 /***/ })
