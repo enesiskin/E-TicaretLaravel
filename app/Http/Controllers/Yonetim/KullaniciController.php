@@ -30,6 +30,8 @@ class KullaniciController extends Controller
 
         return view('yonetim.kullanici.index', compact('list'));
     }
+
+
     public  function  oturumac(){
 
         if (request()->isMethod('POST')){//gelen methodu tespit eder
@@ -68,7 +70,7 @@ class KullaniciController extends Controller
 
     public function form($id=0){ // id her zaman gelmeyeceği için 0 yazdık yeni kayıt ve düzenleme function u bu
 
-        $entry = new  Kullanici; // id gelmezse enrty null gelir o yüzden tanımlama yaptık
+        $entry = new  Kullanici; // id gelmezse $entry null gelir o yüzden tanımlama yaptık
 
             if ($id>0){
                 $entry = Kullanici::find($id);
@@ -91,8 +93,8 @@ class KullaniciController extends Controller
         }
 
         //aktif ve yonetici checkli mi kontrol
-        $data['aktif_mi']= request()->has('aktif_mi') && request('aktif_mi')==1 ? '1' : '0';
-        $data['yonetici_mi']= request()->has('yonetici_mi') && request('yonetici_mi')==1 ? '1' : '0';
+        $data['aktif_mi']= request()->has('aktif_mi') && request('aktif_mi')==1 ? 1 : 0;
+        $data['yonetici_mi']= request()->has('yonetici_mi') && request('yonetici_mi')==1 ? 1 : 0;
 
 
         if ($id>0){
@@ -104,7 +106,7 @@ class KullaniciController extends Controller
         }
         KullaniciDetay::updateOrCreate(
             ['kullanici_id' => $entry->id],
-            ['adres' =>\request('adres'), 'telefon' => \request('telefon'), 'ceptelefonu' => \request('ceptelefonu')]
+            ['adres' =>request('adres'), 'telefon' => request('telefon'), 'ceptelefonu' => request('ceptelefonu')]
         );
         return redirect()->route('yonetim.kullanici.duzenle', $entry->id)
             ->with('mesaj', ($id>0 ? 'Güncellendi.' : 'Kaydedildi.'))

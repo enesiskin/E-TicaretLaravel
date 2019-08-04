@@ -36,7 +36,7 @@ class KategoriController extends Controller
 
     public function form($id = 0){ // id her zaman gelmeyeceği için 0 yazdık yeni kayıt ve düzenleme function u bu
 
-        $entry = new  Kategori(); // id gelmezse enrty null gelir o yüzden tanımlama yaptık
+        $entry = new  Kategori(); // id gelmezse entry null gelir o yüzden tanımlama yaptık
 
         if ($id>0){
             $entry = Kategori::find($id);

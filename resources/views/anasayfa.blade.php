@@ -49,7 +49,10 @@
                     <div class="panel-heading">Günün Fırsatı</div>
                     <div class="panel-body">
                         <a href="{{route('urun', $urun_gunun_firsati->slug)}}">
-                            <img src="https://via.placeholder.com/400x485" class="img-responsive">
+                            <img src="{{$urun_gunun_firsati->detay->urun_resmi !=null ?
+                            asset('/uploads/urunler/'.$urun_gunun_firsati->detay->urun_resmi)
+                            :'https://via.placeholder.com/400x485'}}"
+                                 class="img-responsive" style="min-width:100%;">
                             {{$urun_gunun_firsati->urun_adi}}
                         </a>
                     </div>
@@ -65,7 +68,10 @@
                     <div class="row">
                         @foreach($urunler_one_cikan as $urun)
                             <div class="col-md-3 product">
-                                <a href="{{route('urun', $urun->slug)}}"><img src="https://via.placeholder.com/400x400"></a>
+                                <a href="{{route('urun', $urun->slug)}}"><img src="{{$urun->detay->urun_resmi !=null ?
+                            asset('/uploads/urunler/'.$urun->detay->urun_resmi)
+                            :'https://via.placeholder.com/400x400'}}"
+                            class="img-responsive" style="min-width:100%;"></a>
                                 <p><a href="{{route('urun', $urun->slug)}}">{{$urun->urun_adi}}</a></p>
                                 <p class="price">{{$urun ->fiyati}} ₺</p>
                             </div>
@@ -82,7 +88,10 @@
                     <div class="row">
                         @foreach($urunler_cok_satan as $urun)
                             <div class="col-md-3 product">
-                                <a href="{{route('urun', $urun->slug)}}"><img src="https://via.placeholder.com/400x400"></a>
+                                <a href="{{route('urun', $urun->slug)}}"><img src="{{$urun->detay->urun_resmi !=null ?
+                            asset('/uploads/urunler/'.$urun->detay->urun_resmi)
+                            :'https://via.placeholder.com/400x400'}}"
+                                                                              class="img-responsive" style="min-width:100%;"></a>
                                 <p><a href="{{route('urun', $urun->slug)}}">{{$urun->urun_adi}}</a></p>
                                 <p class="price">{{$urun ->fiyati}} ₺</p>
                             </div>
@@ -98,7 +107,10 @@
                     <div class="row">
                         @foreach($urunler_indirimli as $urun)
                             <div class="col-md-3 product">
-                                <a href="{{route('urun', $urun->slug)}}"><img src="https://via.placeholder.com/400x400"></a>
+                                <a href="{{route('urun', $urun->slug)}}"><img src="{{$urun->detay->urun_resmi !=null ?
+                            asset('/uploads/urunler/'.$urun->detay->urun_resmi)
+                            :'https://via.placeholder.com/400x400'}}"
+                            class="img-responsive" style="min-width:100%;"></a>
                                 <p><a href="{{route('urun', $urun->slug)}}">{{$urun->urun_adi}}</a></p>
                                 <p class="price">{{$urun ->fiyati}} ₺</p>
                             </div>

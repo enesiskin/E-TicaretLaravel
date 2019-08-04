@@ -48,22 +48,22 @@
             @if(count($list)==0)
                 <tr><td colspan="6" class="text-center">Kayıt bulunamadı.</td></tr>
                 @endif
-            @foreach($list as $enrty)
+            @foreach($list as $entry)
             <tr>
-                <td>{{$enrty->id}}</td>
-                <td>{{$enrty->ust_kategori->kategori_adi}}</td>
-                <td>{{$enrty->kategori_adi}}</td>
-                <td>{{$enrty->slug}}</td>
-                <td>{{$enrty->olusturma_tarihi}}</td>
+                <td>{{$entry->id}}</td>
+                <td>{{$entry->ust_kategori->kategori_adi}}</td>
+                <td>{{$entry->kategori_adi}}</td>
+                <td>{{$entry->slug}}</td>
+                <td>{{$entry->olusturma_tarihi}}</td>
 
 
 
 
                 <td style="width: 100px">
-                    <a href="{{route('yonetim.kategori.duzenle', $enrty->id)}}" class="btn btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="Düzenle">
+                    <a href="{{route('yonetim.kategori.duzenle', $entry->id)}}" class="btn btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="Düzenle">
                         <span class="fa fa-pencil"></span>
                     </a>
-                    <a href="{{route('yonetim.kategori.sil', $enrty->id)}}" class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Sil" onclick="return confirm('Emin misiniz?')">
+                    <a href="{{route('yonetim.kategori.sil', $entry->id)}}" class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Sil" onclick="return confirm('Emin misiniz?')">
                         <span class="fa fa-trash"></span>
                     </a>
                 </td>

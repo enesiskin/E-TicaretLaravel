@@ -6,9 +6,9 @@
     <form method="post" action="{{route('yonetim.kullanici.kaydet', @$entry->id)}}">
         {{csrf_field()}}
         <div class="pull-right">
-        <button type="submit" class="btn btn-primary">
-            {{@$entry->id > 0 ? 'Güncelle' : 'Kaydet'}}
-        </button>
+            <button type="submit" class="btn btn-primary">
+                {{@$entry->id > 0 ? 'Güncelle' : 'Kaydet'}}
+            </button>
         </div>
         <h2 class="sub-header">Kullanıcı {{@$entry->id > 0 ? 'Güncelleme' : 'Kayıt'}} Formu</h2>
         @include('layout.partials.errors')
@@ -41,7 +41,7 @@
                 <div class="form-group">
                     <label for="adres">Adres</label>
                     <input type="text" class="form-control" id="adres" placeholder="Adres" name="adres" value="{{
-                    old('adres',$entry->adres)}}">
+                    old('adres',$entry->detay->adres)}}">
                 </div>
             </div>
         </div>
@@ -50,7 +50,7 @@
                 <div class="form-group">
                     <label for="telefon">Telefon</label>
                     <input type="text" class="form-control" id="telefon" placeholder="Telefon" name="telefon" value="{{
-                    old('telefon',$entry->telefon)}}">
+                    old('telefon',$entry->detay->telefon)}}">
                 </div>
             </div>
         </div>
@@ -59,20 +59,20 @@
                 <div class="form-group">
                     <label for="ceptelefonu">Cep Telefonu</label>
                     <input type="text" class="form-control" id="ceptelefonu" placeholder="Cep Telefonu" name="ceptelefonu" value="{{
-                    old('ceptelefonu',$entry->ceptelefonu)}}">
+                    old('ceptelefonu',$entry->detay->ceptelefonu)}}">
                 </div>
             </div>
         </div>
         <div class="checkbox">
             <label>
                 <input type="hidden" name="aktif_mi" value="0">
-                <input type="checkbox" name="aktif_mi" value="1" {{old('aktif_mi',$entry->aktif_mi ? 'checked' : '')}}> Aktif mi?
+                <input type="checkbox" name="aktif_mi" value="1" {{old('aktif_mi',$entry->aktif_mi) ? 'checked' : ''}}> Aktif mi?
             </label>
         </div>
         <div class="checkbox">
             <label>
-                <input type="hidden" name="aktif_mi" value="0">
-                <input type="checkbox" name="yonetici_mi" value="1" {{old('yonetici_mi',$entry->yonetici_mi ? 'checked' : '')}}> Yönetici mi?
+                <input type="hidden" name="yonetici_mi" value="0">
+                <input type="checkbox" name="yonetici_mi" value="1" {{old('yonetici_mi',$entry->yonetici_mi) ? 'checked' : ''}}> Yönetici mi?
             </label>
         </div>
 

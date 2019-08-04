@@ -40,4 +40,7 @@ class Sepet extends Model
     public function sepet_urunler(){
         return $this->hasMany('App\Models\SepetUrun'); // Seppetteki ürünlere erişim sağlar
     }
+    public function kullanici(){
+        return $this->belongsTo('App\Kullanici');
+    }
 }
